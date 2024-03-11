@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 extern crate pixels;
 extern crate winit;
 
@@ -43,7 +45,7 @@ fn main() {
     // Create an event loop and window
     let event_loop = EventLoop::new();
     let window = WindowBuilder::new()
-        .with_title("Julia Set Viewer")
+        .with_title("Fractal Viewer")
         .with_inner_size(winit::dpi::PhysicalSize::new(WIDTH as f64, HEIGHT as f64))
         .with_resizable(false)
         .build(&event_loop)
@@ -112,11 +114,11 @@ fn main() {
 
 fn get_color(i: u32) -> [u8; 4] {
     if i == MAXITER {
-        [0, 0, 0, 255] // Fully opaque black
+        [0, 0, 0, 255]
     } else {
         let hue = ((COLOR_FACTOR * i) as f64 / MAXITER as f64) as u64 % 360;
         let rgb = hsb_to_rgb(hue as f64, 1.0, 1.0);
-        [rgb.0, rgb.1, rgb.2, 255] // Fully opaque grayscale
+        [rgb.0, rgb.1, rgb.2, 255]
     }
 }
 
